@@ -24,6 +24,9 @@
                     <i class="material-icons right">send</i>
                 </div>
             </div>
+            <section v-if="done">
+                <p>Items were updated: </p><span id="time"></span>
+            </section>
             <section v-if="errored">
                 <p>Fetching item information failed.</p>
             </section>

@@ -1,5 +1,5 @@
 //create model
-var url = "http://localhost:3000/items";
+var url = "http://localhost:3000/api/items";
 
 // var Item = require('../../models/ItemsModel');
 //axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -21,7 +21,7 @@ new Vue({
         max: 20,
         loading: true,
         errored: false,
-                    
+        done: false,
     },
         
     mounted() {
@@ -45,7 +45,11 @@ new Vue({
                     console.log(error);
                     this.errored = true;
                 })
-                .finally(() => this.loading = false)
+                .finally(()=> {
+                    this.loading = false;
+                    this.done = true;
+                })
+            this.setTime();
         },
 
         remove(index) {
@@ -90,6 +94,10 @@ new Vue({
         checkInput(itemName) {
             var re = /^[a-öA-Ö0-9., ]+$/;
             return re.test(itemName);
+        },
+
+        setTime() {
+            document.getElementById("time").innerHTML = Date();
         },
         
     }

@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var jsonServer = require('json-server');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -21,6 +22,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));*/
 // view engine setup. not really needed but whatever
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// router for the json database
+app.use('/api', jsonServer.router('db.json'));
 
 app.use(logger('dev'));
 app.use(express.json());
